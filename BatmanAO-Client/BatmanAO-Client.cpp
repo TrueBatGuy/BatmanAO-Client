@@ -419,22 +419,6 @@ int wmain(int argc, wchar_t** wargv)
 
     std::wstring gameDir;
     std::string server;
-    bool doTest = false;
-
-    // Parse args
-    for (int i = 1; i < argc; i++) {
-        if (lstrcmpiW(wargv[i], L"--game") == 0 && i + 1 < argc) {
-            gameDir = wargv[++i];
-        }
-        else if (lstrcmpiW(wargv[i], L"--server") == 0 && i + 1 < argc) {
-            int n = WideCharToMultiByte(CP_UTF8, 0, wargv[++i], -1, nullptr, 0, 0, 0);
-            server.resize(n ? n - 1 : 0);
-            if (n > 0) WideCharToMultiByte(CP_UTF8, 0, wargv[i], -1, &server[0], n, 0, 0);
-        }
-        else if (lstrcmpiW(wargv[i], L"--test") == 0) {
-            doTest = true;
-        }
-    }
 
     if (gameDir.empty()) {
         gameDir = autoDetectGameDir();
@@ -464,12 +448,12 @@ int wmain(int argc, wchar_t** wargv)
     // Probe server (optional)
     printf("Server check: %sstore/catalog/general ...\n", server.c_str());
     bool ok = httpGetJson(server, "/store/catalog/general");
-    if (!ok && !doTest) {
+    if (!ok) {
         printf("Warning: The server did not respond with 2xx/3xx. Continue patch? [y/N]: ");
         int c = getchar(); if (c != 'y' && c != 'Y') return 2;
         while (c != '\n' && c != EOF) c = getchar();
     }
-    else if (ok) {
+    else {
         printf("OK: The server is responding.\n");
         PrintBatBar();
     }
