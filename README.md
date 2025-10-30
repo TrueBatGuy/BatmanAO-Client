@@ -19,8 +19,11 @@ This project helps with testing a **fan-made Batman: Arkham Origins multiplayer 
 2) Enter the my server address: http://arkhamorigins.ddns.net:8385/
 
 3) The client will automatically modify: DefaultWBIDVars.ini
+
 (path by default: C:\Program Files (x86)\Steam\steamapps\common\Batman Arkham Origins\Online\BmGame\Config)
+
 ✨ It will also create a backup of the original file with a `.bak.<date>` extension in the same folder — so you can restore it anytime.
+
 ✅ If everything works correctly, you will see: "Connected to BatComputer!"
 
 4) Launch the game and enjoy multiplayer!  
