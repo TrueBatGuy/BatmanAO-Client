@@ -5,6 +5,7 @@
 //   BatmanAO-Client.exe
 // Usage (non-interactive):
 //   BatmanAO-Client.exe --server http://your-domain:8385/ [--game "C:\...\Batman Arkham Origins"] [--test]
+// http://arkhamorigins.ddns.net:8385/
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <windows.h>
@@ -460,10 +461,7 @@ int wmain(int argc, wchar_t** wargv)
 
     // Idempotency: if already configured for this server — do nothing
     std::vector<std::string> keysToPatch = {
-        "BaseUrl",
-        "EchoBaseURL",
-        "WBIDTicketURL",
-        "WBIDAMSURL"
+        "BaseUrl"
     };
     if (iniAlreadyConfigured(ini, server, keysToPatch)) {
         wprintf(L"Already configured for -> %S\nINI: %s\n", server.c_str(), ini.c_str());
